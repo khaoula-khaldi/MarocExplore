@@ -12,6 +12,7 @@ Route::post('/login', [AuthController::class,'login']);
 
 Route::get('/itineraries', [ItineraryController::class,'index']);
 Route::get('/itineraries/{id}', [ItineraryController::class,'show']);
+Route::get('/itineraries/{itinerary_id}/destinations', [DestinationController::class,'index']);
 
 Route::middleware('auth:sanctum')->group(function(){
 

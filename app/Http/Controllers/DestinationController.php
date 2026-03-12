@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Destination;
 
 class DestinationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($itinerary_id)
     {
-        //
+        return Destination::where("itinerary_id",$itinerary_id)->get();
     }
 
     /**
@@ -19,30 +20,21 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['name' => 'required|string|max:255',
+                            'description' => 'nullable|string',
+                            'itinerary_id' => 'required|exists:itineraries,id']);
+        
+        $destination = Destination::create(['itinerary_id' => $request->itinerary_id,
+                                    'name' => $request->name,
+                                    'description' => $request->description]);
+    
+        return response()->json([
+                                    'message' => 'Destination created successfully',
+                                    'destination' => $destination
+                                ], 201); 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }
