@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Itinerary;
+use App\Models\Favorite;
 
 class User extends Authenticatable
 {
@@ -45,5 +47,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // relation user avec iteneraire 
+    public function itineraire(){
+        return hasMany(Itinerary::class);
+    }
+
+    //relation avec favories 
+    public function favoris(){
+        return $this->belongsToMany(Favorite::class, 'favoris');
     }
 }

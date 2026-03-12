@@ -6,6 +6,7 @@ use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\FavoriteController;
 
+
 Route::post('/register', [AuthController::class,'register']);
 Route::post('/login', [AuthController::class,'login']);
 
