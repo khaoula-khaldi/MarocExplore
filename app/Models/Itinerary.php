@@ -16,12 +16,14 @@ class Itinerary extends Model
     }
 
     //relation avec favories 
-    // public function favoris(){
-    //     return $this->belongsToMany(Itinerary::class, 'favoris');
-    // }
+    public function favoritedBy(){
+        return $this->belongsToMany(Itinerary::class, 'favoris');
+    }
 
+    
     //relation avec user 
     public function user(){
         return $this->belongsTo(User::class);
     }
+    
 }

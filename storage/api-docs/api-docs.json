@@ -1,0 +1,458 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MyExp API",
+        "description": "API documentation for MyExp application",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "summary": "register a unn user ",
+                "operationId": "8a56853624e025573120a09a4c75d468",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User registered successfully"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "connecter a un comote",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User connecter avec success!!"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout user",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "Logout successful"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/itineraries/{itinerary_id}/destinations": {
+            "get": {
+                "summary": "Get destinations of an itinerary",
+                "description": "Display a listing of the resource.",
+                "operationId": "985e6f88f854f691e0318e7485d5d855",
+                "parameters": [
+                    {
+                        "name": "itinerary_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of destinations"
+                    }
+                }
+            }
+        },
+        "/api/destinations": {
+            "post": {
+                "summary": "Create a new destination",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "27af999f18dfd1b7b8083c3b1718b492",
+                "parameters": [
+                    {
+                        "name": "itinerary_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Destination created successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/favorites": {
+            "get": {
+                "summary": "Get user favorites",
+                "description": "Display a listing of the resource.",
+                "operationId": "81123175f76259d611e2c337477dfa5f",
+                "responses": {
+                    "200": {
+                        "description": "List of user favorites"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/itineraries/{id}/favorite": {
+            "post": {
+                "summary": "Add an itinerary to favorites",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "774041976ec1d2247448568fae19e82a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Added to favorites"
+                    },
+                    "400": {
+                        "description": "Already in favorites"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Remove an itinerary from favorites",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "1fcc60cce2470d199363a71ba068c384",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Removed from favorites"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/itineraries": {
+            "get": {
+                "summary": "Get all itineraries",
+                "description": "Display a listing of the resource.",
+                "operationId": "86675d12475f84f785e7563fa8b8a0d9",
+                "responses": {
+                    "200": {
+                        "description": "List of itineraries"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new itinerary",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "9ddf03b1ccb2fb24c86fa810f0614b38",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "duration",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "image",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Itinerary created successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/itineraries/{id}": {
+            "get": {
+                "summary": "Get itinerary by id",
+                "description": "Display the specified resource.",
+                "operationId": "491c9ddb477072a43a407e3d306bd81c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Itinerary found"
+                    },
+                    "404": {
+                        "description": "Itinerary not found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update itinerary",
+                "description": "Update the specified resource in storage.",
+                "operationId": "6c2bd72ca2c9fccd61ef1297b4c0b1a4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "duration",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "image",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Itinerary updated"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Delete itinerary",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "f65090001e6f5de3421bde54a3dd140f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Itinerary deleted successfully"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/itineraries/filter": {
+            "get": {
+                "summary": "Filter itineraries by category and/or duration",
+                "description": "filtrage.",
+                "operationId": "ca1294414e96c42ce440cbb6edce8534",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "Filter by category",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "duration",
+                        "in": "query",
+                        "description": "Filter by duration",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Filtered list of itineraries"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctumAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctumAuth": {
+                "type": "http",
+                "bearerFormat": "Token",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
+}
